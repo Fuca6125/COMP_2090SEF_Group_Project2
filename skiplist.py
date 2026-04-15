@@ -48,21 +48,6 @@ class SkipList:
                 return True
         return False
 
-    def delete(self, value):
-        update = [None] * (self.max_level + 1)
-        current = self.header
-        for i in range(self.level, -1, -1):
-            while current.forward[i] and current.forward[i].value < value:
-                current = current.forward[i]
-            update[i] = current
-        current = current.forward[0]
-        if current and current.value == value:
-            for i in range(self.level + 1):
-                if update[i].forward[i] == current:
-                    update[i].forward[i] = current.forward[i]
-            while self.level > 0 and self.header.forward[self.level] is None:
-                self.level -= 1
-
 
 if __name__ == "__main__":
     # Generate random sorted list
